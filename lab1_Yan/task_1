@@ -1,0 +1,98 @@
+import numpy as np
+
+
+
+# matrix_multiplication and matrix_vector_multiplication
+def multiplication(a, b):
+    res = np.dot(a, b)
+    return res
+
+# matrix_tensor_multiplication and vector_tensor_multiplication
+def matrix_tensor_multiplication(a, b):
+    res = np.tensordot(a, b, axes=0)
+    return res
+
+def vector_in_bra(a):
+    res = "<X"
+    return res
+
+def vector_in_ket(a):
+    res = "Y>"
+    return res
+
+def bracket_in_vector(a):
+    if (bracket == "<X|Y>"):
+        print("<X|Y> ≡ <X| * |Y>")
+        print("<X| =", vector_bra)
+        print("|Y> =\n", vector_ket)
+    elif (bracket == "<X|"):
+        print("<X| =", vector_bra)
+    elif (bracket == "|Y>"):
+        print("|Y> =\n", vector_ket)
+
+
+N=0
+while True:
+    N=int(input("Введите N (степень 2-ки): "))
+
+    if (N % 2 != 0):
+        print("Неправильно, введите N (степень 2-ки): ")
+        continue
+    else:
+        break
+
+print("N =", N)
+
+print("Введите элементы матрицы 1 через пробел: ")
+entries = list(map(int, input().split()))
+matrix_1 = np.array(entries).reshape(N, N)
+print(matrix_1)
+
+print("Введите элементы матрицы 2 через пробел: ")
+entries = list(map(int, input().split()))
+matrix_2 = np.array(entries).reshape(N, N)
+print(matrix_2)
+
+print("Введите элементы вектора 1 через пробел: ")
+entries = list(map(int, input().split()))
+vector_1 = np.array(entries).reshape(N)
+print(vector_1)
+
+print("Введите элементы вектора 2 через пробел: ")
+entries = list(map(int, input().split()))
+vector_2 = np.array(entries).reshape(N)
+print(vector_2)
+
+
+
+print("\nУмножение матриц: ")
+print(multiplication(matrix_1, matrix_2))
+
+print("\nУмножение матрицы на вектор: ")
+print(multiplication(matrix_1, vector_1))
+
+print("\nТензорное умножение матриц: ")
+print(matrix_tensor_multiplication(matrix_1, matrix_2))
+
+print("\nТензорное умножение векторов: ")
+print(matrix_tensor_multiplication(vector_1, vector_2))
+
+
+
+print("\n\nПеревод вектора из матричной в скобочную нотацию: ")
+
+vector_bra = vector_1
+print("Вектор 1:", vector_bra)
+print("Вектор 1 в скобочной нотации:", vector_in_bra(vector_bra) + "|")
+
+vector_ket = np.reshape(vector_2, (N, 1))
+print("Вектор 2:\n", vector_ket)
+print("Вектор 2 в скобочной нотации:", "|" + vector_in_ket(vector_ket))
+
+print("Результат:", vector_in_bra(vector_bra) + "|" + vector_in_ket(vector_ket))
+
+
+
+print("\n\nПеревод скобочной нотации в вектор: ")
+bracket=str(input("Введите bracket( <X|Y> или <X| или |Y>): "))
+bracket_in_vector(bracket)
