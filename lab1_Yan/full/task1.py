@@ -5,7 +5,7 @@ def print_matrix(matrix, name, k=1):
     max_len = max(len(f"{elem:6.2f}") for row in matrix for elem in row)
     for i, row in enumerate(matrix):
         if i > 0:
-            print(" " * (len(name) + 8 + (2 if not isinstance(k, int) else 0)), end="")  # Выравнивание строк для красивого вывода
+            print(" " * (len(name) + 8 + (2 if not isinstance(k, int) else 0)), end="")  # Выравнивание строк
         print("   ".join(f"{elem:{max_len}.2f}" for elem in row), end=" ")
         if i == len(matrix) - 1:
             print(" ]")  # Закрытие матрицы для последней строки
@@ -19,7 +19,7 @@ def print_vector(vector, name, k=1):
     print(f"{name} = {k} * [", "  ".join(f"{elem:.2f}" for elem in vector), "]\n")
 
 # Функция умножения матриц с коэффициентами
-def matrix_multiplication(A, B, k_A, k_B):
+def matrix_multiplication(A, B, k_A=1, k_B=1):
     if len(A[0]) != len(B):
         raise ValueError("Число столбцов матрицы A должно быть равно числу строк матрицы B.")
     result = [[0 for _ in range(len(B[0]))] for _ in range(len(A))]
@@ -62,7 +62,7 @@ def tensor_product_vectors(v, w, k_v=1, k_w=1):
 # Функция перевода вектора в скобочную нотацию для произвольного числа состояний с коэффициентом
 def vector_to_bracket_notation(v, k=1):
     if len(v) == 2:
-        return f"{v[0]:.2f}|0⟩ + {v[1]:.2f}|1⟩"
+        return f"{k * v[0]:.2f}|0⟩ + {k * v[1]:.2f}|1⟩"
     else:
         n = len(v)
         num_qubits = (n - 1).bit_length()  # Определяем количество кубитов

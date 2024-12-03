@@ -21,7 +21,7 @@ superPos_state = np.array([0.5, 0.5, 0.5, 0.5])
 """
 def vector_to_bracket_notation(v, k=1):
     if len(v) == 2:
-        return f"{v[0]:.2f}|0⟩ + {v[1]:.2f}|1⟩"
+        return f"{k * v[0]:.2f}|0⟩ + {k * v[1]:.2f}|1⟩"
     else:
         n = len(v)
         num_qubits = (n - 1).bit_length()  # Определяем количество кубитов
