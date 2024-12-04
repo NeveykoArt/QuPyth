@@ -95,6 +95,6 @@ for i in range(m):
     num_states = 2 ** (2 * num_bits)
 
     initial_state = np.zeros(num_states, dtype=int)
-    initial_index = int(f"{i:0{num_bits}b}00", 2)
+    initial_index = int(f"{i:0{num_bits}b}{"0" * num_bits}", 2)
     initial_state[initial_index] = 1
     print(vector_to_bracket_notation(matrix_vector_multiplication(F_2, initial_state)))
